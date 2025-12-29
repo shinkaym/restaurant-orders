@@ -4,52 +4,52 @@
 
 /* Import local fonts */
 @font-face {
-  font-family: 'Playfair Display';
-  font-weight: 700;
+  font-family: 'Roboto';
+  font-weight: 100;
   font-style: normal;
-  src: url('./assets/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-Thin.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Playfair Display';
-  font-weight: 700;
-  font-style: italic;
-  src: url('./assets/fonts/PlayfairDisplay-BoldItalic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Raleway';
+  font-family: 'Roboto';
   font-weight: 400;
   font-style: normal;
-  src: url('./assets/fonts/Raleway-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Roboto';
   font-weight: 500;
   font-style: normal;
-  src: url('./assets/fonts/Raleway-Medium.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-Medium.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Roboto';
   font-weight: 500;
   font-style: italic;
-  src: url('./assets/fonts/Raleway-MediumItalic.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-MediumItalic.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Roboto';
   font-weight: 600;
   font-style: normal;
-  src: url('./assets/fonts/Raleway-SemiBold.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Roboto';
   font-weight: 700;
   font-style: normal;
-  src: url('./assets/fonts/Raleway-Bold.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-style: italic;
+  src: url('./assets/fonts/Roboto-BoldItalic.ttf') format('truetype');
 }
 
 /* Base styles layer */
@@ -62,7 +62,7 @@
 
   html,
   body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-image: url('/src/assets/images/image-bg.avif');
     background-size: cover;
     background-position: center;
@@ -107,13 +107,13 @@
 
   button {
     cursor: pointer;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 
   input,
   textarea,
   select {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 
   /* Scrollbar Styling */
