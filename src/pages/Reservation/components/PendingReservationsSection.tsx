@@ -9,7 +9,6 @@ interface PendingReservationsSectionProps {
   onPrint: (reservation: ReservationItem) => void;
   onViewDetails: (reservation: ReservationItem) => void;
   onConfirmComplete: (id: string) => void;
-  onConfirmDelete: (id: string) => void;
 }
 
 const PendingReservationsSection: React.FC<PendingReservationsSectionProps> = ({
@@ -19,7 +18,6 @@ const PendingReservationsSection: React.FC<PendingReservationsSectionProps> = ({
   onPrint,
   onViewDetails,
   onConfirmComplete,
-  onConfirmDelete,
 }) => {
   return (
     <div className="reservations-section">
@@ -38,7 +36,6 @@ const PendingReservationsSection: React.FC<PendingReservationsSectionProps> = ({
               onPrint={onPrint}
               onViewDetails={onViewDetails}
               onConfirmComplete={onConfirmComplete}
-              onConfirmDelete={onConfirmDelete}
             />
           ))
         ) : (

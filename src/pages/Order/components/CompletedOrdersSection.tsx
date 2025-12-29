@@ -6,12 +6,14 @@ interface CompletedOrdersSectionProps {
   orders: OrderItem[];
   cardsGridStyle: React.CSSProperties;
   completedCount: number;
+  onViewDetails: (order: OrderItem) => void;
 }
 
 const CompletedOrdersSection: React.FC<CompletedOrdersSectionProps> = ({
   orders,
   cardsGridStyle,
   completedCount,
+  onViewDetails,
 }) => {
   return (
     <div className="orders-section">
@@ -23,7 +25,7 @@ const CompletedOrdersSection: React.FC<CompletedOrdersSectionProps> = ({
       </div>
       <div className="cards-grid" style={cardsGridStyle}>
         {orders.length > 0 ? (
-          orders.map((order) => <OrderCard key={order.oid} order={order} onPrint={() => {}} />)
+          orders.map((order) => <OrderCard key={order.oid} order={order} onPrint={() => {}} onViewDetails={onViewDetails} />)
         ) : (
           <div className="empty-state">
             <i className="fas fa-inbox"></i>

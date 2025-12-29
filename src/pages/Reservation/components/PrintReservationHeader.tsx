@@ -10,7 +10,6 @@ const PrintReservationHeader: React.FC<PrintReservationHeaderProps> = ({ reserva
     <div className="bill-header">
       <div className="restaurant-info">
         <h1>PRISTINE DINING</h1>
-        <p>123 Culinary Lane, Foodie City, CA 90210</p>
       </div>
       <div className="bill-meta">
         <h2>Reservation #{reservation.rid}</h2>

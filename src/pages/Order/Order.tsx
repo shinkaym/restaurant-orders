@@ -24,7 +24,6 @@ const Order: React.FC = () => {
     completedCount,
     totalCount,
     handleCompleteOrder,
-    handleDeleteOrder,
     handleDateChange,
     loadOrders,
     showCompleted,
@@ -66,17 +65,11 @@ const Order: React.FC = () => {
     setConfirmAction('complete', id);
   };
 
-  const handleConfirmDelete = (id: string) => {
-    setConfirmAction('delete', id);
-  };
-
   const handleConfirmAction = () => {
     if (!pendingOrderId) return;
 
     if (confirmAction === 'complete') {
       handleCompleteOrder(pendingOrderId);
-    } else if (confirmAction === 'delete') {
-      handleDeleteOrder(pendingOrderId);
     }
   };
 
@@ -116,13 +109,13 @@ const Order: React.FC = () => {
                 onPrint={handlePrintOrder}
                 onViewDetails={handleViewItemDetails}
                 onConfirmComplete={handleConfirmComplete}
-                onConfirmDelete={handleConfirmDelete}
               />
             ) : (
               <CompletedOrdersSection
                 orders={completedOrders}
                 cardsGridStyle={cardsGridStyle}
                 completedCount={completedCount}
+                onViewDetails={handleViewItemDetails}
               />
             )}
           </div>
@@ -133,7 +126,7 @@ const Order: React.FC = () => {
 
       <ItemDetailsModal isOpen={itemDetailsModalOpen} item={itemDetailsOrder} onClose={closeItemDetailsModal} />
 
-      {/* Confirmation Modals */}
+      {/* Confirmation Modal */}
       {confirmAction === 'complete' && getPendingOrder() && (
         <ConfirmModal
           isOpen={true}
@@ -145,19 +138,6 @@ const Order: React.FC = () => {
           onCancel={handleCancelConfirm}
           isDangerous={false}
           buttonColor='success'
-        />
-      )}
-
-      {confirmAction === 'delete' && getPendingOrder() && (
-        <ConfirmModal
-          isOpen={true}
-          title='Delete Order'
-          message={`Are you sure you want to delete order ${pendingOrderId}? This action cannot be undone.`}
-          confirmText='Delete'
-          cancelText='Cancel'
-          onConfirm={handleConfirmAction}
-          onCancel={handleCancelConfirm}
-          isDangerous={true}
         />
       )}
 

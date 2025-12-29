@@ -7,7 +7,6 @@ interface OrderCardProps {
   onPrint: (order: OrderItem) => void;
   onViewDetails?: (order: OrderItem) => void;
   onConfirmComplete?: (id: string) => void;
-  onConfirmDelete?: (id: string) => void;
 }
 
 const OrderCard: React.FC<OrderCardProps> = ({
@@ -15,7 +14,6 @@ const OrderCard: React.FC<OrderCardProps> = ({
   onPrint,
   onViewDetails,
   onConfirmComplete,
-  onConfirmDelete,
 }) => {
   return (
     <ItemCard
@@ -31,7 +29,6 @@ const OrderCard: React.FC<OrderCardProps> = ({
       onPrint={() => onPrint(order)}
       onViewDetails={onViewDetails ? () => onViewDetails(order) : undefined}
       onConfirmComplete={onConfirmComplete}
-      onConfirmDelete={onConfirmDelete}
       printTitle="Print order"
       completeTitle="Mark as done"
     />

@@ -7,7 +7,6 @@ interface ReservationCardProps {
   onPrint: (reservation: ReservationItem) => void;
   onViewDetails?: (reservation: ReservationItem) => void;
   onConfirmComplete?: (id: string) => void;
-  onConfirmDelete?: (id: string) => void;
 }
 
 const ReservationCard: React.FC<ReservationCardProps> = ({
@@ -15,7 +14,6 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
   onPrint,
   onViewDetails,
   onConfirmComplete,
-  onConfirmDelete,
 }) => {
   const guestInfo = (
     <span className="guest-badge">
@@ -39,7 +37,6 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
       onPrint={() => onPrint(reservation)}
       onViewDetails={onViewDetails ? () => onViewDetails(reservation) : undefined}
       onConfirmComplete={onConfirmComplete}
-      onConfirmDelete={onConfirmDelete}
       printTitle="Print reservation"
       completeTitle="Check in"
     />

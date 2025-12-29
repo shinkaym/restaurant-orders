@@ -24,7 +24,6 @@ const Reservation: React.FC = () => {
     completedCount,
     totalCount,
     handleCompleteReservation,
-    handleDeleteReservation,
     handleDateChange,
     loadReservations,
     showCompleted,
@@ -66,17 +65,11 @@ const Reservation: React.FC = () => {
     setConfirmAction('complete', id);
   };
 
-  const handleConfirmDelete = (id: string) => {
-    setConfirmAction('delete', id);
-  };
-
   const handleConfirmAction = () => {
     if (!pendingReservationId) return;
 
     if (confirmAction === 'complete') {
       handleCompleteReservation(pendingReservationId);
-    } else if (confirmAction === 'delete') {
-      handleDeleteReservation(pendingReservationId);
     }
   };
 
@@ -120,13 +113,13 @@ const Reservation: React.FC = () => {
                 onPrint={handlePrintReservation}
                 onViewDetails={handleViewItemDetails}
                 onConfirmComplete={handleConfirmComplete}
-                onConfirmDelete={handleConfirmDelete}
               />
             ) : (
               <CompletedReservationsSection
                 reservations={completedReservations}
                 cardsGridStyle={cardsGridStyle}
                 completedCount={completedCount}
+                onViewDetails={handleViewItemDetails}
               />
             )}
           </div>
@@ -137,7 +130,7 @@ const Reservation: React.FC = () => {
 
       <ItemDetailsModal isOpen={itemDetailsModalOpen} item={itemDetailsReservation} onClose={closeItemDetailsModal} />
 
-      {/* Confirmation Modals */}
+      {/* Confirmation Modal */}
       {confirmAction === 'complete' && getPendingReservation() && (
         <ConfirmModal
           isOpen={true}
@@ -149,19 +142,6 @@ const Reservation: React.FC = () => {
           onCancel={handleCancelConfirm}
           isDangerous={false}
           buttonColor='success'
-        />
-      )}
-
-      {confirmAction === 'delete' && getPendingReservation() && (
-        <ConfirmModal
-          isOpen={true}
-          title='Delete Reservation'
-          message={`Are you sure you want to delete reservation ${pendingReservationId}? This action cannot be undone.`}
-          confirmText='Delete'
-          cancelText='Cancel'
-          onConfirm={handleConfirmAction}
-          onCancel={handleCancelConfirm}
-          isDangerous={true}
         />
       )}
 

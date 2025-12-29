@@ -29,8 +29,3 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export interface ApiError extends Error {
-  status?: string;
-  msg?: string;
-  originalData?: unknown;
-}

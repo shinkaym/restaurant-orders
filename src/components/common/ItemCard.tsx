@@ -17,7 +17,6 @@ interface ItemCardProps<T extends ItemCardData> {
   onPrint: (item: T) => void;
   onViewDetails?: (item: T) => void;
   onConfirmComplete?: (id: string) => void;
-  onConfirmDelete?: (id: string) => void;
   printTitle?: string;
   completeTitle?: string;
 }
@@ -29,7 +28,6 @@ const ItemCard = React.forwardRef<HTMLDivElement, ItemCardProps<ItemCardData>>(
       onPrint,
       onViewDetails = () => {},
       onConfirmComplete = () => {},
-      onConfirmDelete = () => {},
       printTitle = 'Print',
       completeTitle = 'Mark as done',
     },
@@ -107,13 +105,6 @@ const ItemCard = React.forwardRef<HTMLDivElement, ItemCardProps<ItemCardData>>(
               title={completeTitle}
             >
               <i className="fas fa-check"></i>
-            </button>
-            <button
-              className="action-btn delete-btn"
-              onClick={() => onConfirmDelete(item.id)}
-              title="Delete"
-            >
-              <i className="fas fa-trash"></i>
             </button>
           </div>
         )}

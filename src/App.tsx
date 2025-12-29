@@ -56,6 +56,23 @@ function App() {
   }, [isAuthenticated, logout, setRestored]);
 
   /**
+   * Listen for 401 unauthorized events from axios interceptor
+   * Auto-logout when server returns 401
+   */
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      logout();
+      showErrorToast('Unauthorized - Please login again');
+    };
+
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
+
+    return () => {
+      window.removeEventListener('auth:unauthorized', handleUnauthorized);
+    };
+  }, [logout]);
+
+  /**
    * Setup auto-logout timer when user is authenticated
    * Token expires in 3 days, logout 1 minute before expiration
    */

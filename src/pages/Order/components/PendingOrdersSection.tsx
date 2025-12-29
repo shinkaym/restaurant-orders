@@ -9,7 +9,6 @@ interface PendingOrdersSectionProps {
   onPrint: (order: OrderItem) => void;
   onViewDetails: (order: OrderItem) => void;
   onConfirmComplete: (id: string) => void;
-  onConfirmDelete: (id: string) => void;
 }
 
 const PendingOrdersSection: React.FC<PendingOrdersSectionProps> = ({
@@ -19,7 +18,6 @@ const PendingOrdersSection: React.FC<PendingOrdersSectionProps> = ({
   onPrint,
   onViewDetails,
   onConfirmComplete,
-  onConfirmDelete,
 }) => {
   return (
     <div className="orders-section">
@@ -38,7 +36,6 @@ const PendingOrdersSection: React.FC<PendingOrdersSectionProps> = ({
               onPrint={onPrint}
               onViewDetails={onViewDetails}
               onConfirmComplete={onConfirmComplete}
-              onConfirmDelete={onConfirmDelete}
             />
           ))
         ) : (

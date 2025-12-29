@@ -6,12 +6,14 @@ interface CompletedReservationsSectionProps {
   reservations: ReservationItem[];
   cardsGridStyle: React.CSSProperties;
   completedCount: number;
+  onViewDetails: (reservation: ReservationItem) => void;
 }
 
 const CompletedReservationsSection: React.FC<CompletedReservationsSectionProps> = ({
   reservations,
   cardsGridStyle,
   completedCount,
+  onViewDetails,
 }) => {
   return (
     <div className="reservations-section">
@@ -24,7 +26,7 @@ const CompletedReservationsSection: React.FC<CompletedReservationsSectionProps> 
       <div className="cards-grid" style={cardsGridStyle}>
         {reservations.length > 0 ? (
           reservations.map((res) => (
-            <ReservationCard key={res.rid} reservation={res} onPrint={() => {}} />
+            <ReservationCard key={res.rid} reservation={res} onPrint={() => {}} onViewDetails={onViewDetails} />
           ))
         ) : (
           <div className="empty-state">
