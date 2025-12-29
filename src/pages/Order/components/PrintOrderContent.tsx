@@ -1,6 +1,7 @@
 import React from 'react';
 import PrintOrderHeader from './PrintOrderHeader';
 import type { OrderItem } from '../../../types';
+import { formatPhoneNumber } from '../../../utils/phoneFormat';
 
 interface PrintOrderContentProps {
   order: OrderItem;
@@ -31,7 +32,7 @@ const PrintOrderContent: React.FC<PrintOrderContentProps> = ({ order }) => {
             </div>
             <div className="tr">
               <div className="td label">Phone:</div>
-              <div className="td value">{order.customer_phone}</div>
+              <div className="td value">{formatPhoneNumber(order.customer_phone)}</div>
             </div>
           </div>
         </div>

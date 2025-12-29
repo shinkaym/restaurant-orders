@@ -1,6 +1,7 @@
 import React from 'react';
 import PrintReservationHeader from './PrintReservationHeader';
 import type { ReservationItem } from '../../../types';
+import { formatPhoneNumber } from '../../../utils/phoneFormat';
 
 interface PrintReservationContentProps {
   reservation: ReservationItem;
@@ -35,7 +36,7 @@ const PrintReservationContent: React.FC<PrintReservationContentProps> = ({ reser
           </div>
           <div className="tr">
             <div className="td label">Phone:</div>
-            <div className="td value">{reservation.customer_phone}</div>
+            <div className="td value">{formatPhoneNumber(reservation.customer_phone)}</div>
           </div>
         </div>
       </div>

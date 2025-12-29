@@ -3,14 +3,7 @@ import { useOrdersByDate, useCompleteOrder, useDeleteOrder } from './queries/use
 import { useOrderStore } from '../store/order.store';
 import { showLoadingToast, updateToastSuccess, updateToastError } from '../utils/toast';
 
-/**
- * Combined hook: TanStack Query (data) + Zustand (UI state)
- * - Query: Fetch orders, cache, auto-refresh every 1 minute
- * - Mutations: Complete/Delete with optimistic updates
- * - Zustand: Filter/sort, modal state, temporary state
- */
 export const useOrders = () => {
-  // Zustand - UI state (filter, sort, modal, temporary state)
   const {
     selectedDate: uiSelectedDate,
     showCompleted,

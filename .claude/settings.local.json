@@ -75,7 +75,8 @@
       "mcp__plugin_serena_serena__read_file",
       "Bash(npm cache clean:*)",
       "Bash(npm run dev:*)",
-      "mcp__plugin_serena_serena__activate_project"
+      "mcp__plugin_serena_serena__activate_project",
+      "mcp__plugin_serena_serena__list_dir"
     ],
     "deny": [
       "Bash(git add:*)",
