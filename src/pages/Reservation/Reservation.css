@@ -1,0 +1,157 @@
+/* Reservation Management Page Styles */
+@import "../../styles/shared.css";
+
+/* Reservations Section - specific only */
+.reservations-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Reservation-specific classes */
+.guest-info {
+  margin: 10px 0;
+}
+
+.order-info {
+  margin: 8px 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.75em;
+  color: var(--text-light);
+}
+
+.order-info i {
+  color: var(--primary-color);
+  font-size: 0.9em;
+  opacity: 0.8;
+  min-width: 14px;
+  text-align: center;
+}
+
+.guest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.05), rgba(255, 215, 0, 0.03));
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 165, 0, 0.2);
+  font-size: 1.05em;
+  color: var(--text-color);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.guest-badge i {
+  font-size: 1em;
+}
+
+/* All other classes defined in shared.css:
+   - .main-layout
+   - .section-header
+   - .badge-count
+   - .cards-grid
+   - .order-card
+   - .card-header
+   - .order-id, .order-time, .status-badge
+   - .card-body
+   - .customer-name, .order-items
+   - .card-note-section
+   - .card-footer, .order-price
+   - .card-actions, .action-btn
+   - .empty-state
+   - .modal + variants
+   - .refresh-btn animation
+   - Responsive rules for all containers
+*/
+
+/* Print Styles for Reservation */
+.print-reservation-content {
+  padding: 20px;
+  background: white;
+  color: black;
+}
+
+@media print {
+  /* Hide everything except print content */
+  body * {
+    visibility: hidden;
+  }
+
+  .print-reservation-content,
+  .print-reservation-content * {
+    visibility: visible;
+  }
+
+  .print-reservation-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  /* Ensure proper page breaks */
+  .print-reservation-content {
+    page-break-inside: avoid;
+  }
+
+  /* Table styles for print */
+  .details-table,
+  .items-table,
+  .totals-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .items-table th,
+  .items-table td,
+  .details-table td,
+  .totals-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .items-table th {
+    background-color: #f8f9fa !important;
+    font-weight: bold;
+  }
+
+  /* Section headers */
+  .section-header {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+  }
+
+  /* Totals section */
+  .totals-section {
+    margin-top: 20px;
+  }
+
+  .grand-total {
+    font-weight: bold;
+    font-size: 1.1em;
+    border-top: 2px solid #333 !important;
+  }
+
+  /* Notes section */
+  .notes-section {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+  }
+}

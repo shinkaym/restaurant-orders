@@ -1,0 +1,200 @@
+/* ===== CSS COLOR VARIABLES ===== */
+/* Centralized color system for the entire application */
+/* All values consolidated from index.css and layout/shared.css */
+
+:root {
+  /* ===== PRIMARY COLORS ===== */
+  --primary-color: #800020;           /* Dark Red/Maroon - Main brand color */
+  --primary-light: #a52a2a;           /* Lighter variant of primary */
+  --primary-dark: #a52a2a;            /* Dark variant of primary */
+
+  /* ===== SECONDARY COLORS ===== */
+  --secondary-color: #F5F5DC;         /* Beige - From index.css */
+  --accent-color: #FFD700;            /* Gold - Accent color */
+  --secondary-light: rgba(255, 215, 0, 0.3);  /* Light gold with transparency */
+  --secondary-lighter: rgba(255, 215, 0, 0.1); /* Very light gold */
+  --secondary-lightest: rgba(255, 215, 0, 0.05); /* Almost transparent gold */
+
+  /* ===== STATUS COLORS ===== */
+  /* Error/Danger Colors - Based on original layout.css/shared.css usage */
+  --error-color: #DC3545;              /* Bootstrap red - from original code */
+  --error-dark: #D32F2F;               /* Material red - darker variant */
+  --error-darker: #C62828;             /* Even darker error */
+  --error-light: rgba(220, 53, 69, 0.05);   /* Light error background */
+  --error-lighter: rgba(220, 53, 69, 0.1);  /* Lighter error background */
+  --error-lightest: rgba(220, 53, 69, 0.2); /* Lightest error background */
+
+  /* Success/Positive Colors - Based on original layout.css/shared.css usage */
+  --success-color: #28A745;            /* Bootstrap green - from original code */
+  --success-light: #4CAF50;            /* Lighter green */
+  --success-lighter: #388E3C;          /* Medium green */
+  --success-dark: #2E7D32;             /* Dark green */
+  --success-lightest: rgba(76, 175, 80, 0.05);  /* Very light green background */
+  --success-light-bg: rgba(76, 175, 80, 0.08);  /* Light green background */
+  --success-lighter-bg: rgba(76, 175, 80, 0.2); /* Lighter green background */
+
+  /* Warning/Caution Colors */
+  --warning-color: #FFA500;            /* Orange */
+  --warning-light: #FF9800;            /* Material orange */
+  --warning-lighter: #F57C00;          /* Darker orange */
+  --warning-dark: #E65100;             /* Very dark orange */
+  --warning-lightest: rgba(255, 165, 0, 0.05); /* Very light orange background */
+
+  /* Info/Information Colors - Based on original shared.css usage */
+  --info-color: #1976D2;               /* Material blue - from original code */
+  --info-light: #1565C0;               /* Darker blue */
+
+  /* ===== NEUTRAL COLORS ===== */
+  /* Whites & Light Backgrounds */
+  --white: #FFFFFF;
+  --white-translucent: rgba(255, 255, 255, 0.95);  /* Nearly opaque white */
+  --white-lighter: rgba(255, 255, 255, 0.97);      /* Very light white */
+  --beige-light: rgba(245, 245, 220, 0.95);        /* Beige tone */
+
+  /* Dark Colors */
+  --black: #000000;
+  --black-overlay: rgba(0, 0, 0, 0.5);            /* Dark overlay */
+  --black-heavy: rgba(0, 0, 0, 0.2);              /* Heavy black */
+  --black-medium: rgba(0, 0, 0, 0.15);            /* Medium black */
+  --black-light: rgba(0, 0, 0, 0.1);              /* Light black */
+  --black-lighter: rgba(0, 0, 0, 0.05);           /* Very light black */
+
+  /* ===== TEXT & CONTENT COLORS ===== */
+  --text-color: #333333;                          /* Primary text color - from index.css */
+  --text-light: #666666;                          /* Secondary text - from index.css */
+  --text-light-secondary: #888888;                /* Tertiary text - from index.css */
+  --text-muted: #999999;                          /* Muted text - from index.css */
+  --text-placeholder: #aaaaaa;                    /* Placeholder text - from index.css */
+
+  /* ===== BACKGROUND & BORDER COLORS ===== */
+  --background-color: #FFFFFF;                    /* Default background - from index.css */
+  --bg-light: #f9f9f9;                            /* Light background - from index.css */
+  --border-color: #E0E0E0;                        /* Border color - from index.css */
+
+  /* ===== SHADOW COLORS ===== */
+  --primary-shadow: rgba(128, 0, 32, 0.15);      /* Primary shadow */
+  --primary-shadow-dark: rgba(128, 0, 32, 0.3);  /* Dark primary shadow */
+  --primary-shadow-light: rgba(128, 0, 32, 0.1); /* Light primary shadow */
+  --primary-shadow-medium: rgba(128, 0, 32, 0.2);/* Medium primary shadow */
+
+  /* ===== GRADIENT COLORS ===== */
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  --gradient-primary-light: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  --gradient-white-beige: linear-gradient(135deg, var(--white-lighter), var(--beige-light));
+  --gradient-white-light: linear-gradient(135deg, var(--white-translucent), var(--white-lighter));
+  --gradient-primary-shadow: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(255, 215, 0, 0.05));
+  --gradient-refresh-btn: linear-gradient(135deg, #FF9800, #F57C00);
+  --gradient-refresh-hover: linear-gradient(135deg, #F57C00, #E65100);
+  --gradient-info: linear-gradient(135deg, var(--info-color), #1976D2);
+  --gradient-info-hover: linear-gradient(135deg, #1976D2, #1565C0);
+  --gradient-success: linear-gradient(135deg, var(--success-color), #388E3C);
+  --gradient-success-hover: linear-gradient(135deg, #388E3C, #2E7D32);
+  --gradient-error: linear-gradient(135deg, var(--error-color), #D32F2F);
+  --gradient-error-hover: linear-gradient(135deg, #D32F2F, #C62828);
+
+  /* ===== SHADOW DEFINITIONS ===== */
+  /* Core shadow set from index.css */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-primary: 0 10px 30px rgba(128, 0, 32, 0.3);
+  --shadow-popup: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  /* ===== LAYOUT VARIABLES ===== */
+  --page-background-image: url('/src/assets/images/image-bg.avif');
+  --cards-grid-columns: repeat(4, 1fr);
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 1200px) {
+  :root {
+    --cards-grid-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --cards-grid-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --cards-grid-columns: repeat(1, 1fr);
+  }
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spinIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

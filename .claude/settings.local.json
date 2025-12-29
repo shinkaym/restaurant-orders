@@ -1,0 +1,119 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:pub.dev)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:react.dev)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:dart.dev)",
+      "WebFetch(domain:flutter.dev)",
+      "WebFetch(domain:docs.npmjs.com)",
+      "Skill(frontend-design:frontend-design)",
+      "mcp__ide__getDiagnostics",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(comm -23:*)",
+      "Bash(dir /B:*)",
+      "Bash(dart format:*)",
+      "Bash(dart analyze:*)",
+      "Bash(dart run:*)",
+      "Bash(flutter pub get:*)",
+      "Bash(flutter pub cache:*)",
+      "Bash(flutter pub run:*)",
+      "Bash(flutter pub remove:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(flutter clean:*)",
+      "Bash(flutter build:*)",
+      "Bash(flutter pub run build_runner build:*)",
+      "Bash(timeout 15 flutter run:*)",
+      "Bash(timeout 120 flutter pub:*)",
+      "Bash(timeout 300 flutter build:*)",
+      "Bash(npm install:*)",
+      "Bash(npm ci:*)",
+      "Bash(npm start -- --reset-cache)",
+      "Bash(npm run:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm ls:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)",
+      "Bash(npx react-native:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm run:*)",
+      "Bash(pnpm run lint:*)",
+      "Bash(node:*)",
+      "Bash(react-native:*)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(touch:*)",
+      "Bash(kill:*)",
+      "Bash(ps:*)",
+      "Bash(lsof:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git branch:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue view:*)",
+      "mcp__plugin_serena_serena__find_file",
+      "mcp__plugin_serena_serena__search_for_pattern",
+      "mcp__plugin_serena_serena__get_symbols_overview",
+      "mcp__plugin_serena_serena__find_symbol",
+      "mcp__plugin_serena_serena__read_file",
+      "Bash(npm cache clean:*)",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)",
+      "Bash(sudo:*)",
+      "Bash(rm -rf:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Bash(systemctl:*)",
+      "Bash(docker rm:*)"
+    ],
+    "ask": []
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/validate-bash.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep|Glob|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/shinkaym/Workspace/github-package-repo/claude-gemini-bridge/hooks/gemini-bridge.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

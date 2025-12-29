@@ -1,0 +1,14 @@
+# Restaurant Orders - robots.txt
+# Allow search engine crawlers to index the site
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /api/
+
+# Crawl delay for heavy crawlers
+Crawl-delay: 1
+
+# Sitemap location (if available)
+# Sitemap: https://example.com/sitemap.xml
