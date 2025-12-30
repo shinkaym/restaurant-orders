@@ -7,7 +7,6 @@ export const useOrders = () => {
   const {
     selectedDate: uiSelectedDate,
     showCompleted,
-    filterStatus,
     printModalOpen,
     printOrder,
     confirmAction,
@@ -25,23 +24,15 @@ export const useOrders = () => {
   const ordersQuery = useOrdersByDate(uiSelectedDate);
   const completeOrderMutation = useCompleteOrder();
 
-  // Filter and categorize orders
-  const processedOrders = useMemo(() => {
-    const allOrders = ordersQuery.data || [];
-    let filtered = [...allOrders];
-
-    // Apply status filter
-    if (filterStatus === 'pending') {
-      filtered = filtered.filter((o) => o.status === 'New');
-    } else if (filterStatus === 'completed') {
-      filtered = filtered.filter((o) => o.status === 'Done');
-    }
-
-    return filtered;
-  }, [ordersQuery.data, filterStatus]);
-
-  const pendingOrders = useMemo(() => processedOrders.filter((o) => o.status === 'New'), [processedOrders]);
-  const completedOrders = useMemo(() => processedOrders.filter((o) => o.status === 'Done'), [processedOrders]);
+  // Categorize orders
+  const pendingOrders = useMemo(
+    () => (ordersQuery.data || []).filter((o) => o.status === 'New'),
+    [ordersQuery.data]
+  );
+  const completedOrders = useMemo(
+    () => (ordersQuery.data || []).filter((o) => o.status === 'Done'),
+    [ordersQuery.data]
+  );
 
   // Handlers
   const handleCompleteOrder = useCallback(

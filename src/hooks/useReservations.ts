@@ -7,7 +7,6 @@ export const useReservations = () => {
   const {
     selectedDate: uiSelectedDate,
     showCompleted,
-    filterStatus,
     printModalOpen,
     printReservation,
     confirmAction,
@@ -25,28 +24,14 @@ export const useReservations = () => {
   const reservationsQuery = useReservationsByDate(uiSelectedDate);
   const completeReservationMutation = useCompleteReservation();
 
-  // Filter and categorize reservations
-  const doneReservations = useMemo(() => {
-    const allReservations = reservationsQuery.data || [];
-    let filtered = [...allReservations];
-
-    // Apply status filter
-    if (filterStatus === 'pending') {
-      filtered = filtered.filter((r) => r.status === 'New');
-    } else if (filterStatus === 'completed') {
-      filtered = filtered.filter((r) => r.status === 'Done');
-    }
-
-    return filtered;
-  }, [reservationsQuery.data, filterStatus]);
-
+  // Categorize reservations
   const pendingReservations = useMemo(
-    () => doneReservations.filter((r) => r.status === 'New'),
-    [doneReservations]
+    () => (reservationsQuery.data || []).filter((r) => r.status === 'New'),
+    [reservationsQuery.data]
   );
   const completedReservations = useMemo(
-    () => doneReservations.filter((r) => r.status === 'Done'),
-    [doneReservations]
+    () => (reservationsQuery.data || []).filter((r) => r.status === 'Done'),
+    [reservationsQuery.data]
   );
 
   // Handlers
