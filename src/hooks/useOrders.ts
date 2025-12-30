@@ -7,7 +7,6 @@ export const useOrders = () => {
   const {
     selectedDate: uiSelectedDate,
     showCompleted,
-    sortBy,
     filterStatus,
     printModalOpen,
     printOrder,
@@ -38,18 +37,8 @@ export const useOrders = () => {
       filtered = filtered.filter((o) => o.status === 'Done');
     }
 
-    // Apply sorting
-    filtered.sort((a, b) => {
-      if (sortBy === 'name') {
-        return a.customer_name.localeCompare(b.customer_name);
-      } else if (sortBy === 'date') {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      }
-      return 0;
-    });
-
     return filtered;
-  }, [ordersQuery.data, filterStatus, sortBy]);
+  }, [ordersQuery.data, filterStatus]);
 
   const pendingOrders = useMemo(() => processedOrders.filter((o) => o.status === 'New'), [processedOrders]);
   const completedOrders = useMemo(() => processedOrders.filter((o) => o.status === 'Done'), [processedOrders]);

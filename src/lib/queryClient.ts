@@ -1,12 +1,13 @@
 import { QueryClient } from '@tanstack/react-query';
+import { ENV } from '../config/env';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
-      staleTime: 1000 * 60, // 1 minute
-      refetchInterval: 1000 * 60, // Auto-refetch every 1 minute
+      staleTime: ENV.queryRefetchInterval,
+      refetchInterval: ENV.queryRefetchInterval,
     },
     mutations: {
       retry: 1,

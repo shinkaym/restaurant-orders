@@ -14,7 +14,6 @@ interface OrderUIState {
   // Filter/Sort state
   showCompleted: boolean;
   selectedDate: string;
-  sortBy: 'date' | 'name' | 'status';
   filterStatus: 'all' | 'pending' | 'completed';
 
   // Actions
@@ -23,7 +22,6 @@ interface OrderUIState {
   setItemDetailsModal: (open: boolean, order?: OrderItem | null) => void;
   setShowCompleted: (show: boolean) => void;
   setSelectedDate: (date: string) => void;
-  setSortBy: (sort: 'date' | 'name' | 'status') => void;
   setFilterStatus: (status: 'all' | 'pending' | 'completed') => void;
   reset: () => void;
 }
@@ -49,7 +47,6 @@ export const useOrderStore = create<OrderUIState>()(
         itemDetailsOrder: null,
         showCompleted: false,
         selectedDate: getInitialDate(),
-        sortBy: 'date',
         filterStatus: 'all',
 
         // Actions
@@ -65,8 +62,6 @@ export const useOrderStore = create<OrderUIState>()(
         setShowCompleted: (show) => set({ showCompleted: show }),
 
         setSelectedDate: (date) => set({ selectedDate: date }),
-
-        setSortBy: (sort) => set({ sortBy: sort }),
 
         setFilterStatus: (status) => set({ filterStatus: status }),
 
@@ -87,7 +82,6 @@ export const useOrderStore = create<OrderUIState>()(
         partialize: (state) => ({
           selectedDate: state.selectedDate,
           showCompleted: state.showCompleted,
-          sortBy: state.sortBy,
           filterStatus: state.filterStatus,
         }),
       }

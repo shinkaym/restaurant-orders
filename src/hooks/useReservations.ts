@@ -3,18 +3,10 @@ import { useReservationsByDate, useCompleteReservation } from './queries/useRese
 import { useReservationStore } from '../store/reservation.store';
 import { showLoadingToast, updateToastSuccess, updateToastError } from '../utils/toast';
 
-/**
- * Combined hook: TanStack Query (data) + Zustand (UI state)
- * - Query: Fetch reservations, cache, auto-refresh every 1 minute
- * - Mutations: Complete with optimistic updates
- * - Zustand: Filter/sort, modal state, temporary state
- */
 export const useReservations = () => {
-  // Zustand - UI state (filter, sort, modal, temporary state)
   const {
     selectedDate: uiSelectedDate,
     showCompleted,
-    sortBy,
     filterStatus,
     printModalOpen,
     printReservation,
@@ -34,7 +26,7 @@ export const useReservations = () => {
   const completeReservationMutation = useCompleteReservation();
 
   // Filter and categorize reservations
-  const processedReservations = useMemo(() => {
+  const doneReservations = useMemo(() => {
     const allReservations = reservationsQuery.data || [];
     let filtered = [...allReservations];
 
@@ -45,28 +37,16 @@ export const useReservations = () => {
       filtered = filtered.filter((r) => r.status === 'Done');
     }
 
-    // Apply sorting
-    filtered.sort((a, b) => {
-      if (sortBy === 'name') {
-        return a.customer_name.localeCompare(b.customer_name);
-      } else if (sortBy === 'time') {
-        return a.reservation_time.localeCompare(b.reservation_time);
-      } else if (sortBy === 'date') {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      }
-      return 0;
-    });
-
     return filtered;
-  }, [reservationsQuery.data, filterStatus, sortBy]);
+  }, [reservationsQuery.data, filterStatus]);
 
   const pendingReservations = useMemo(
-    () => processedReservations.filter((r) => r.status === 'New'),
-    [processedReservations]
+    () => doneReservations.filter((r) => r.status === 'New'),
+    [doneReservations]
   );
   const completedReservations = useMemo(
-    () => processedReservations.filter((r) => r.status === 'Done'),
-    [processedReservations]
+    () => doneReservations.filter((r) => r.status === 'Done'),
+    [doneReservations]
   );
 
   // Handlers

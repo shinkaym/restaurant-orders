@@ -5,6 +5,7 @@ import { router } from './router';
 import { useAuthStore } from './store/auth.store';
 import { getCookie, hasRememberedCredentials } from './utils/cookieManager';
 import { showErrorToast } from './utils/toast';
+import { ENV } from './config/env';
 
 function App() {
   const logout = useAuthStore((state) => state.logout);
@@ -77,8 +78,8 @@ function App() {
       return;
     }
 
-    // Token has 3 days expiration
-    const TOKEN_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+    // Token expiration from env config
+    const TOKEN_LIFETIME_MS = ENV.tokenExpiryDays * 24 * 60 * 60 * 1000;
     const LOGOUT_WARNING_TIME_MS = 60 * 1000; // 1 minute before expiration
 
     // Clear existing timer

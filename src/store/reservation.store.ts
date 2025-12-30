@@ -14,7 +14,6 @@ interface ReservationUIState {
   // Filter/Sort state
   showCompleted: boolean;
   selectedDate: string;
-  sortBy: 'date' | 'name' | 'time';
   filterStatus: 'all' | 'pending' | 'completed';
 
   // Actions
@@ -23,7 +22,6 @@ interface ReservationUIState {
   setItemDetailsModal: (open: boolean, reservation?: ReservationItem | null) => void;
   setShowCompleted: (show: boolean) => void;
   setSelectedDate: (date: string) => void;
-  setSortBy: (sort: 'date' | 'name' | 'time') => void;
   setFilterStatus: (status: 'all' | 'pending' | 'completed') => void;
   reset: () => void;
 }
@@ -49,7 +47,6 @@ export const useReservationStore = create<ReservationUIState>()(
         itemDetailsReservation: null,
         showCompleted: false,
         selectedDate: getInitialDate(),
-        sortBy: 'time',
         filterStatus: 'all',
 
         // Actions
@@ -65,8 +62,6 @@ export const useReservationStore = create<ReservationUIState>()(
         setShowCompleted: (show) => set({ showCompleted: show }),
 
         setSelectedDate: (date) => set({ selectedDate: date }),
-
-        setSortBy: (sort) => set({ sortBy: sort }),
 
         setFilterStatus: (status) => set({ filterStatus: status }),
 
@@ -87,7 +82,6 @@ export const useReservationStore = create<ReservationUIState>()(
         partialize: (state) => ({
           selectedDate: state.selectedDate,
           showCompleted: state.showCompleted,
-          sortBy: state.sortBy,
           filterStatus: state.filterStatus,
         }),
       }
