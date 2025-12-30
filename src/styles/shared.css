@@ -779,8 +779,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 
 /* ===== ENHANCED PRINT MODAL CONTENT ===== */
-/* Import elegant fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 .modal-print-content {
   background: transparent;
@@ -1260,16 +1258,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   box-shadow: 0 4px 12px var(--error-color);
 }
 
-/* ItemDetailsModal Styling */
-.customer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid var(--primary-color);
-}
+/* ItemDetailsModal Styling - customer-header already defined above at line 427 */
 
 .customer-info {
   flex: 1;

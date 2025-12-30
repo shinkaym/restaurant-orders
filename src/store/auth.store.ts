@@ -5,6 +5,7 @@ import type { LoginRequest } from '../types/auth';
 import { showLoadingToast, updateToastSuccess, updateToastError } from '../utils/toast';
 import { tokenManager } from '../api/axiosInstance';
 import { clearToken } from '../utils/rememberMe';
+import { mockLoginApi } from '../data/mockAuth';
 
 interface User {
   username: string;
@@ -43,7 +44,8 @@ export const useAuthStore = create<AuthStoreState>()(
       const loadingToastId = showLoadingToast('Logging in...');
       try {
         // Call real login API
-        const response = await authApi.login(credentials);
+        // const response = await authApi.login(credentials);
+        const response = await mockLoginApi.login(credentials);
 
         // Token is already saved by authApi.login()
         // Store user info with token
