@@ -5,11 +5,6 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
-/**
- * Protected Route Component
- * Redirects to /login if user is not authenticated
- * Waits for token restoration before checking auth status
- */
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const store = useAuth();
   const { isAuthenticated, isLoading, isRestored } = store;

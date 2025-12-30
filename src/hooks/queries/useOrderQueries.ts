@@ -9,9 +9,6 @@ export const orderKeys = {
   byDate: (date: string) => [...orderKeys.all, 'byDate', date] as const,
 };
 
-/**
- * Hook to fetch orders by date (using real API)
- */
 export const useOrdersByDate = (date: string) => {
   return useQuery({
     queryKey: orderKeys.byDate(date),
@@ -21,9 +18,6 @@ export const useOrdersByDate = (date: string) => {
   });
 };
 
-/**
- * Hook to complete an order (with optimistic update)
- */
 export const useCompleteOrder = () => {
   const queryClient = useQueryClient();
 

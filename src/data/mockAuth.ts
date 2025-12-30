@@ -1,9 +1,3 @@
-/**
- * Mock Authentication API
- * Simulates real API behavior with tokens and delays
- * Use credentials: username: "user1", password: "123456"
- */
-
 interface MockLoginRequest {
   username: string;
   password: string;
@@ -43,10 +37,6 @@ const generateMockToken = (username: string): string => {
   return `${header}.${payload}.${signature}`;
 };
 
-/**
- * Mock login function - simulates API call
- * Delay 500ms to simulate network request
- */
 export const mockLoginApi = {
   login: async (credentials: MockLoginRequest): Promise<MockLoginResponse> => {
     // Simulate network delay

@@ -1,9 +1,5 @@
 import { useAuthStore } from '../store/auth.store';
 
-/**
- * Hook to use auth store with login/logout functionality
- * Handles authentication state and operations
- */
 export const useAuth = () => {
   const {
     user,

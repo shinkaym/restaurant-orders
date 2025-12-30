@@ -1,8 +1,3 @@
-/**
- * Formats a phone number to (555) 123-1234 format
- * @param phone - Raw phone number string (can include or exclude formatting)
- * @returns Formatted phone number string
- */
 export const formatPhoneNumber = (phone: string | undefined | null): string => {
   if (!phone) return '';
 

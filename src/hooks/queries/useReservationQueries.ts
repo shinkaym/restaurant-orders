@@ -9,9 +9,6 @@ export const reservationKeys = {
   byDate: (date: string) => [...reservationKeys.all, 'byDate', date] as const,
 };
 
-/**
- * Hook to fetch reservations by date (using real API)
- */
 export const useReservationsByDate = (date: string) => {
   return useQuery({
     queryKey: reservationKeys.byDate(date),
@@ -21,9 +18,6 @@ export const useReservationsByDate = (date: string) => {
   });
 };
 
-/**
- * Hook to complete a reservation (check-in) with optimistic update
- */
 export const useCompleteReservation = () => {
   const queryClient = useQueryClient();
 

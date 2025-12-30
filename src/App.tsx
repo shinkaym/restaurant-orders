@@ -13,13 +13,6 @@ function App() {
   const expirationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isInitializedRef = useRef(false);
 
-  /**
-   * Initialize authentication on app load
-   * Restore user session if token exists in cookie
-   *
-   * NOTE: This effect MUST only run once on mount to prevent race conditions.
-   * Using empty dependency array [] with isInitializedRef guard ensures this.
-   */
   useEffect(() => {
     if (isInitializedRef.current) return;
     isInitializedRef.current = true;
@@ -47,10 +40,6 @@ function App() {
     useAuthStore.getState().setRestored(true);
   }, []);
 
-  /**
-   * Listen for 401 unauthorized events from axios interceptor
-   * Auto-logout when server returns 401
-   */
   useEffect(() => {
     const handleUnauthorized = () => {
       logout();
@@ -64,10 +53,6 @@ function App() {
     };
   }, [logout]);
 
-  /**
-   * Setup auto-logout timer when user is authenticated
-   * Token expires in 3 days, logout 1 minute before expiration
-   */
   useEffect(() => {
     if (!isAuthenticated) {
       // Clear timer if user logs out
