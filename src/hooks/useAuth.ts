@@ -11,8 +11,10 @@ export const useAuth = () => {
     isLoading,
     error,
     isRestored,
+    rememberMe,
     login,
     logout,
+    setRememberMe,
   } = useAuthStore();
 
   return {
@@ -22,10 +24,12 @@ export const useAuth = () => {
     isLoading,
     error,
     isRestored,
+    rememberMe,
 
     // Actions
     handleLogin: login,
     handleLogout: logout,
+    setRememberMe,
 
     // Direct access to store actions if needed
     login,

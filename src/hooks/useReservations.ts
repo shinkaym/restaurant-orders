@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from 'react';
-import { useReservationsByDate, useCompleteReservation, useDeleteReservation } from './queries/useReservationQueries';
+import { useReservationsByDate, useCompleteReservation } from './queries/useReservationQueries';
 import { useReservationStore } from '../store/reservation.store';
 import { showLoadingToast, updateToastSuccess, updateToastError } from '../utils/toast';
 
 /**
  * Combined hook: TanStack Query (data) + Zustand (UI state)
  * - Query: Fetch reservations, cache, auto-refresh every 1 minute
- * - Mutations: Complete/Delete with optimistic updates
+ * - Mutations: Complete with optimistic updates
  * - Zustand: Filter/sort, modal state, temporary state
  */
 export const useReservations = () => {
@@ -32,7 +32,6 @@ export const useReservations = () => {
   // TanStack Query - Data fetching & caching
   const reservationsQuery = useReservationsByDate(uiSelectedDate);
   const completeReservationMutation = useCompleteReservation();
-  const deleteReservationMutation = useDeleteReservation();
 
   // Filter and categorize reservations
   const processedReservations = useMemo(() => {
@@ -80,14 +79,6 @@ export const useReservations = () => {
     [completeReservationMutation, setConfirmAction, setShowCompleted]
   );
 
-  const handleDeleteReservation = useCallback(
-    (rid: string) => {
-      deleteReservationMutation.mutate(rid);
-      setConfirmAction(null, null);
-    },
-    [deleteReservationMutation, setConfirmAction]
-  );
-
   const handleDateChange = useCallback(
     (date: string) => {
       const toastId = showLoadingToast('Loading reservations...');
@@ -111,9 +102,8 @@ export const useReservations = () => {
       const result = await reservationsQuery.refetch();
       const count = result.data?.length || 0;
       updateToastSuccess(toastId, `Loaded ${count} reservations`);
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : 'Failed to load reservations';
-      updateToastError(toastId, errorMsg);
+    } catch {
+      updateToastError(toastId, 'Failed to load reservations');
     }
   }, [reservationsQuery]);
 
@@ -144,7 +134,6 @@ export const useReservations = () => {
 
     // Actions
     handleCompleteReservation,
-    handleDeleteReservation,
     handleDateChange,
     loadReservations,
 

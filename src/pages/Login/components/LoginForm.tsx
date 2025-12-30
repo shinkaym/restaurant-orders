@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,12 +6,15 @@ import FormInput from '../../../components/common/FormInput';
 import Button from '../../../components/common/Button';
 import { useAuth } from '../../../hooks/useAuth';
 import { loginSchema, type LoginFormData } from '../../../schemas/auth.schema';
-import { saveToken, clearToken } from '../../../utils/rememberMe';
+import { loadCredentials } from '../../../utils/cookieManager';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
-  const { handleLogin, isLoading, isAuthenticated, user } = useAuth();
-  const [rememberMe, setRememberMe] = useState(false);
+  const { handleLogin, isLoading, isAuthenticated } = useAuth();
+
+  // Load saved credentials once on component initialization
+  const savedCredentials = useMemo(() => loadCredentials(), []);
+  const [rememberMe, setRememberMe] = useState(!!savedCredentials);
 
   const {
     register,
@@ -20,31 +23,31 @@ const LoginForm: React.FC = () => {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: 'onSubmit',
+    defaultValues: {
+      username: savedCredentials?.username || '',
+      password: savedCredentials?.password || '',
+    },
   });
 
   // Navigate to dashboard after successful login
   useEffect(() => {
-    if (isAuthenticated && user?.token) {
-      // Save or clear token based on rememberMe checkbox
-      if (rememberMe) {
-        saveToken(user.token);
-      } else {
-        clearToken();
-      }
-
+    if (isAuthenticated) {
       // Delay navigation to show success message
       const timer = setTimeout(() => {
         navigate('/order');
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [isAuthenticated, user, rememberMe, navigate]);
+  }, [isAuthenticated, navigate]);
 
   const onSubmit = async (data: LoginFormData) => {
-    await handleLogin({
-      username: data.username,
-      password: data.password,
-    });
+    await handleLogin(
+      {
+        username: data.username,
+        password: data.password,
+      },
+      rememberMe
+    );
   };
 
   // Show redirecting message while navigating

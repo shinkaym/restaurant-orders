@@ -1,5 +1,5 @@
 import { axiosInstance, tokenManager } from './axiosInstance';
-import type { LoginRequest, LoginResponse } from '../types/auth';
+import type { LoginRequest, LoginResponse, RegisterRequest } from '../types/auth';
 
 export const authApi = {
   login: async (credentials: LoginRequest): Promise<LoginResponse> => {
@@ -11,5 +11,10 @@ export const authApi = {
 
   logout: async (): Promise<void> => {
     tokenManager.removeToken();
+  },
+
+  register: async (userData: RegisterRequest): Promise<void> => {
+    await axiosInstance.post('/user/register', userData);
+    // No need to handle response, just check if it succeeds
   },
 };

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { useOrdersByDate, useCompleteOrder, useDeleteOrder } from './queries/useOrderQueries';
+import { useOrdersByDate, useCompleteOrder } from './queries/useOrderQueries';
 import { useOrderStore } from '../store/order.store';
 import { showLoadingToast, updateToastSuccess, updateToastError } from '../utils/toast';
 
@@ -25,7 +25,6 @@ export const useOrders = () => {
   // Query for orders by date
   const ordersQuery = useOrdersByDate(uiSelectedDate);
   const completeOrderMutation = useCompleteOrder();
-  const deleteOrderMutation = useDeleteOrder();
 
   // Filter and categorize orders
   const processedOrders = useMemo(() => {
@@ -65,14 +64,6 @@ export const useOrders = () => {
     [completeOrderMutation, setConfirmAction, setShowCompleted]
   );
 
-  const handleDeleteOrder = useCallback(
-    (oid: string) => {
-      deleteOrderMutation.mutate(oid);
-      setConfirmAction(null, null);
-    },
-    [deleteOrderMutation, setConfirmAction]
-  );
-
   const handleDateChange = useCallback(
     (date: string) => {
       const toastId = showLoadingToast('Loading orders...');
@@ -96,9 +87,8 @@ export const useOrders = () => {
       const result = await ordersQuery.refetch();
       const count = result.data?.length || 0;
       updateToastSuccess(toastId, `Loaded ${count} orders`);
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : 'Failed to load orders';
-      updateToastError(toastId, errorMsg);
+    } catch {
+      updateToastError(toastId, 'Failed to load orders');
     }
   }, [ordersQuery]);
 
@@ -129,7 +119,6 @@ export const useOrders = () => {
 
     // Actions
     handleCompleteOrder,
-    handleDeleteOrder,
     handleDateChange,
     loadOrders,
 

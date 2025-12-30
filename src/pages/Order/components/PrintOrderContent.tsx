@@ -1,5 +1,4 @@
 import React from 'react';
-import PrintOrderHeader from './PrintOrderHeader';
 import type { OrderItem } from '../../../types';
 import { formatPhoneNumber } from '../../../utils/phoneFormat';
 
@@ -18,14 +17,20 @@ const PrintOrderContent: React.FC<PrintOrderContentProps> = ({ order }) => {
 
   return (
     <div className="print-order-content">
-        <PrintOrderHeader order={order} />
-
         <div className="section-header">
           <h3 className="section-title">Order Information</h3>
         </div>
 
         <div className="details-table">
           <div className="tbody">
+            <div className="tr">
+              <div className="td label">Order #:</div>
+              <div className="td value">{order.oid}</div>
+            </div>
+            <div className="tr">
+              <div className="td label">Date:</div>
+              <div className="td value">{order.created_at}</div>
+            </div>
             <div className="tr">
               <div className="td label">Customer:</div>
               <div className="td value">{order.customer_name}</div>

@@ -6,6 +6,7 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   success?: string;
   icon?: string;
+  isRequired?: boolean;
 }
 
 export default React.forwardRef<HTMLInputElement, FormInputProps>(function FormInput(
@@ -18,6 +19,7 @@ export default React.forwardRef<HTMLInputElement, FormInputProps>(function FormI
     success,
     disabled = false,
     icon,
+    isRequired = false,
     ...rest
   },
   ref
@@ -27,7 +29,10 @@ export default React.forwardRef<HTMLInputElement, FormInputProps>(function FormI
       {label && (
         <label htmlFor={name} className="form-label">
           {icon && <i className={`fas fa-${icon}`}></i>}
-          <span>{label}</span>
+          <span>
+            {label}
+            {isRequired && <span style={{ color: '#ef4444', marginLeft: '4px' }}>*</span>}
+          </span>
         </label>
       )}
       <div className="input-wrapper">

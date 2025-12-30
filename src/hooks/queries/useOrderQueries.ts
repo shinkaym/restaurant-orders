@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { MOCK_ORDERS } from '../../data/mockData';
+import { orderApi } from '../../api';
 import type { OrderItem } from '../../types';
 import { showSuccessToast, showErrorToast } from '../../utils/toast';
 
@@ -10,27 +10,16 @@ export const orderKeys = {
 };
 
 /**
- * Hook to fetch orders by date (using mock data)
+ * Hook to fetch orders by date (using real API)
  */
 export const useOrdersByDate = (date: string) => {
   return useQuery({
     queryKey: orderKeys.byDate(date),
     queryFn: async () => {
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      // Filter mock data by selected date
-      const filteredOrders = MOCK_ORDERS.filter((order) => order.created_at.includes(date));
-
-      return filteredOrders;
+      return await orderApi.getOrdersByDate(date);
     },
   });
 };
-
-/**
- * In-memory store for mock orders (simulates server state)
- */
-let mockOrdersStore: OrderItem[] = [...MOCK_ORDERS];
 
 /**
  * Hook to complete an order (with optimistic update)
@@ -40,15 +29,7 @@ export const useCompleteOrder = () => {
 
   return useMutation({
     mutationFn: async (oid: string) => {
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 300));
-
-      // Update in-memory store
-      mockOrdersStore = mockOrdersStore.map((order) =>
-        order.oid === oid ? { ...order, status: 'Done' } : order
-      );
-
-      return `Order ${oid} completed successfully`;
+      return await orderApi.updateOrderStatus(oid, 'Done');
     },
     onMutate: async (oid: string) => {
       // Cancel in-flight queries
@@ -68,52 +49,12 @@ export const useCompleteOrder = () => {
     onSuccess: (_data, variables) => {
       showSuccessToast(`Order ${variables} completed!`);
     },
-    onError: (error) => {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to complete order';
-      showErrorToast(errorMessage);
+    onError: () => {
+      showErrorToast('Failed to complete order');
       // Refetch on error to sync with server
       queryClient.invalidateQueries({ queryKey: orderKeys.all });
     },
   });
 };
 
-/**
- * Hook to delete an order (with optimistic update)
- */
-export const useDeleteOrder = () => {
-  const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: async (oid: string) => {
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 300));
-
-      // Remove from in-memory store
-      mockOrdersStore = mockOrdersStore.filter((order) => order.oid !== oid);
-
-      return `Order ${oid} deleted successfully`;
-    },
-    onMutate: async (oid: string) => {
-      // Cancel in-flight queries
-      await queryClient.cancelQueries({ queryKey: orderKeys.all });
-
-      // Optimistically update all order caches
-      queryClient.setQueriesData(
-        { queryKey: orderKeys.all },
-        (oldData: OrderItem[] | undefined) => {
-          if (!oldData) return oldData;
-          return oldData.filter((order) => order.oid !== oid);
-        }
-      );
-    },
-    onSuccess: (_data, variables) => {
-      showSuccessToast(`Order ${variables} deleted!`);
-    },
-    onError: (error) => {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to delete order';
-      showErrorToast(errorMessage);
-      // Refetch on error to sync with server
-      queryClient.invalidateQueries({ queryKey: orderKeys.all });
-    },
-  });
-};

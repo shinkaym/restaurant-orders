@@ -3,57 +3,48 @@ import { RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { router } from './router';
 import { useAuthStore } from './store/auth.store';
-import { getCookie } from './utils/cookieManager';
+import { getCookie, hasRememberedCredentials } from './utils/cookieManager';
 import { showErrorToast } from './utils/toast';
-import { loadToken, clearToken } from './utils/rememberMe';
-import { tokenManager } from './api/axiosInstance';
 
 function App() {
   const logout = useAuthStore((state) => state.logout);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const setRestored = useAuthStore((state) => state.setRestored);
   const expirationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isInitializedRef = useRef(false);
 
   /**
    * Initialize authentication on app load
-   * Restore user if token exists in cookie or localStorage (remember me)
+   * Restore user session if token exists in cookie
+   *
+   * NOTE: This effect MUST only run once on mount to prevent race conditions.
+   * Using empty dependency array [] with isInitializedRef guard ensures this.
    */
   useEffect(() => {
     if (isInitializedRef.current) return;
     isInitializedRef.current = true;
 
     const cookieToken = getCookie('auth_token');
-    const savedToken = loadToken();
+    const currentIsAuthenticated = useAuthStore.getState().isAuthenticated;
+    const hasCredentials = hasRememberedCredentials();
 
-    // If we have a saved token from "remember me", restore it to cookie
-    if (savedToken && !cookieToken) {
-      tokenManager.setToken(savedToken);
+    // If token exists in cookie but user is not authenticated in store, restore session
+    if (cookieToken && !currentIsAuthenticated) {
       useAuthStore.setState({
         isAuthenticated: true,
         isRestored: true,
+        rememberMe: hasCredentials, // Restore rememberMe based on saved credentials
       });
       return;
     }
 
-    // If token exists in cookie but user is not authenticated in store, restore from token
-    if (cookieToken && !isAuthenticated) {
-      useAuthStore.setState({
-        isAuthenticated: true,
-        isRestored: true,
-      });
-      return;
-    }
-
-    // If no token in cookie or localStorage but user appears authenticated, logout
-    if (!cookieToken && !savedToken && isAuthenticated) {
-      logout();
-      clearToken();
+    // If no token but user appears authenticated, logout
+    if (!cookieToken && currentIsAuthenticated) {
+      useAuthStore.getState().logout();
       showErrorToast('Session expired. Please login again.');
     }
 
-    setRestored(true);
-  }, [isAuthenticated, logout, setRestored]);
+    useAuthStore.getState().setRestored(true);
+  }, []);
 
   /**
    * Listen for 401 unauthorized events from axios interceptor
