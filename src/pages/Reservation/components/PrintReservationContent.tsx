@@ -62,6 +62,13 @@ const PrintReservationContent: React.FC<PrintReservationContentProps> = ({ reser
         </div>
       </div>
 
+      {reservation.notes && (
+        <div className="notes-section">
+          <h3 className="section-title">Note</h3>
+          <p>{reservation.notes}</p>
+        </div>
+      )}
+
       <div className="totals-section">
         <div className="totals-table">
           <div className="tbody">
@@ -80,13 +87,6 @@ const PrintReservationContent: React.FC<PrintReservationContentProps> = ({ reser
           </div>
         </div>
       </div>
-
-      {reservation.notes && (
-        <div className="notes-section">
-          <h3 className="section-title">Note</h3>
-          <p>{reservation.notes}</p>
-        </div>
-      )}
     </div>
   );
 };

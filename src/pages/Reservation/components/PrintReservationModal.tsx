@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import PrintReservationContent from './PrintReservationContent';
 import type { ReservationItem } from '../../../types';
-import './PrintReservationModal.css';
 
 interface PrintReservationModalProps {
   isOpen: boolean;
@@ -19,7 +18,7 @@ const PrintReservationModal: React.FC<PrintReservationModalProps> = ({
 
   const handlePrint = useReactToPrint({
     contentRef: printRef,
-    documentTitle: `Reservation-${reservation?.id || 'Details'}`,
+    documentTitle: `Reservation-${reservation?.rid || 'Details'}`,
   });
 
   if (!isOpen || !reservation) return null;

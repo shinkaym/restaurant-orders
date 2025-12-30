@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import PrintOrderContent from './PrintOrderContent';
 import type { OrderItem } from '../../../types';
-import './PrintOrderModal.css';
 
 interface PrintOrderModalProps {
   isOpen: boolean;
@@ -15,35 +14,35 @@ const PrintOrderModal: React.FC<PrintOrderModalProps> = ({ isOpen, order, onClos
 
   const handlePrint = useReactToPrint({
     contentRef: printRef,
-    documentTitle: `Order-${order?.id || 'Details'}`,
+    documentTitle: `Order-${order?.oid || 'Details'}`,
   });
 
   if (!isOpen || !order) return null;
 
   return (
-    <div className="print-modal-overlay">
-      <div className="print-modal">
-        <div className="print-modal-header">
+    <div className='print-modal-overlay'>
+      <div className='print-modal'>
+        <div className='print-modal-header'>
           <h2>
-            <i className="fas fa-receipt"></i>
+            <i className='fas fa-receipt'></i>
             Order Details
           </h2>
-          <button className="print-modal-close" onClick={onClose}>
-            <i className="fas fa-times"></i>
+          <button className='print-modal-close' onClick={onClose}>
+            <i className='fas fa-times'></i>
           </button>
         </div>
-        <div className="print-modal-body">
-          <div className="modal-print-content" ref={printRef}>
+        <div className='print-modal-body'>
+          <div className='modal-print-content' ref={printRef}>
             <PrintOrderContent order={order} />
           </div>
         </div>
-        <div className="print-modal-footer">
-          <button className="print-modal-btn print-modal-btn-secondary" onClick={onClose}>
-            <i className="fas fa-times"></i>
+        <div className='print-modal-footer'>
+          <button className='print-modal-btn print-modal-btn-secondary' onClick={onClose}>
+            <i className='fas fa-times'></i>
             Close
           </button>
-          <button className="print-modal-btn print-modal-btn-primary" onClick={handlePrint}>
-            <i className="fas fa-print"></i>
+          <button className='print-modal-btn print-modal-btn-primary' onClick={handlePrint}>
+            <i className='fas fa-print'></i>
             Print
           </button>
         </div>

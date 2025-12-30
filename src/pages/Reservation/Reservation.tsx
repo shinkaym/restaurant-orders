@@ -11,7 +11,6 @@ import { useResponsiveGrid } from '../../hooks/useResponsiveGrid';
 import { useReservations } from '../../hooks/useReservations';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import type { ReservationItem } from '../../types';
-import './Reservation.css';
 
 const Reservation: React.FC = () => {
   usePageTitle('Reservation Management | PRISTINE DINING');

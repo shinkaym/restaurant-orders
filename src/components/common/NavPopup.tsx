@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { useAuth } from '../../hooks/useAuth';
-import './css/NavPopup.css';
-import './css/NavPopupButton.css';
 
 interface NavLink {
   icon: string;

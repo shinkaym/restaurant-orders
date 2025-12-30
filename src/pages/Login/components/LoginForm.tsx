@@ -7,7 +7,6 @@ import Button from '../../../components/common/Button';
 import { useAuth } from '../../../hooks/useAuth';
 import { loginSchema, type LoginFormData } from '../../../schemas/auth.schema';
 import { saveToken, clearToken } from '../../../utils/rememberMe';
-import './LoginForm.css';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();

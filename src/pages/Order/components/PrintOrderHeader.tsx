@@ -14,7 +14,6 @@ const PrintOrderHeader: React.FC<PrintOrderHeaderProps> = ({ order }) => {
       <div className="bill-meta">
         <h2>Order #{order.oid}</h2>
         <p>Date: {order.created_at}</p>
-        <p>Time: {order.pickup_time}</p>
       </div>
     </div>
   );

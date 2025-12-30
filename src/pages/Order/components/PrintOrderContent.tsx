@@ -58,6 +58,13 @@ const PrintOrderContent: React.FC<PrintOrderContentProps> = ({ order }) => {
           </div>
         </div>
 
+        {order.notes && (
+          <div className="notes-section">
+            <h3 className="section-title">Note</h3>
+            <p>{order.notes}</p>
+          </div>
+        )}
+
         <div className="totals-section">
           <div className="totals-table">
             <div className="tbody">
@@ -76,13 +83,6 @@ const PrintOrderContent: React.FC<PrintOrderContentProps> = ({ order }) => {
             </div>
           </div>
         </div>
-
-        {order.notes && (
-          <div className="notes-section">
-            <h3 className="section-title">Note</h3>
-            <p>{order.notes}</p>
-          </div>
-        )}
     </div>
   );
 };

@@ -11,7 +11,6 @@ import { useResponsiveGrid } from '../../hooks/useResponsiveGrid';
 import { useOrders } from '../../hooks/useOrders';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import type { OrderItem } from '../../types';
-import './Order.css';
 
 const Order: React.FC = () => {
   usePageTitle('Order Management | PRISTINE DINING');

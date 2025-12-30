@@ -14,7 +14,6 @@ const PrintReservationHeader: React.FC<PrintReservationHeaderProps> = ({ reserva
       <div className="bill-meta">
         <h2>Reservation #{reservation.rid}</h2>
         <p>Date: {reservation.created_at}</p>
-        <p>Time: {reservation.reservation_time}</p>
       </div>
     </div>
   );

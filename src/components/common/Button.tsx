@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import './css/Button.css';
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
